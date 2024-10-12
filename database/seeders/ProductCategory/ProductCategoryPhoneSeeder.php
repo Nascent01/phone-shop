@@ -3,8 +3,6 @@
 namespace Database\Seeders\ProductCategory;
 
 use App\Constants\ProductCategory\ProductCategoryConstant;
-use App\Models\ProductCategory\ProductCategory;
-use App\Models\ProductCategory\ProductCategoryTranslation;
 use App\Repository\ProductCategory\ProductCategoryRepository;
 use Illuminate\Database\Seeder;
 

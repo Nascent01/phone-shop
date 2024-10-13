@@ -2,6 +2,8 @@
 
 namespace App\Repository\Product;
 
+use App\Models\Product\Product;
+use App\Models\Product\ProductTranslation;
 use App\Repository\EloquentRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,16 +12,16 @@ class ProductRepository implements EloquentRepositoryInterface
 
     public function create(array $attributes): Model
     {
-        // TODO: Implement create() method.
+        return Product::create($attributes);
     }
 
     public function createTranslation(array $attributes): Model
     {
-        // TODO: Implement createTranslation() method.
+      return ProductTranslation::create($attributes);
     }
 
     public function find($id): ?Model
     {
-        // TODO: Implement find() method.
+        return Product::find($id);
     }
 }

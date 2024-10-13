@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('old_id');
             $table->string('sku');
             $table->timestamps();
+
+            $table->unique(['sku', 'old_id']);
         });
     }
 

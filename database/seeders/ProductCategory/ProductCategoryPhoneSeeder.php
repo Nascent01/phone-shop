@@ -3,16 +3,16 @@
 namespace Database\Seeders\ProductCategory;
 
 use App\Constants\ProductCategory\ProductCategoryConstant;
-use App\Repository\ProductCategory\ProductCategoryRepository;
+use App\Services\ProductCategory\ProductCategoryService;
 use Illuminate\Database\Seeder;
 
 class ProductCategoryPhoneSeeder extends Seeder
 {
-    protected $productCategoryRepository;
+    protected $productCategoryService;
 
-    public function __construct(ProductCategoryRepository $productCategoryRepository)
+    public function __construct(ProductCategoryService $productCategoryRepository)
     {
-        $this->productCategoryRepository = $productCategoryRepository;
+        $this->productCategoryService = $productCategoryRepository;
     }
 
     /**
@@ -22,13 +22,13 @@ class ProductCategoryPhoneSeeder extends Seeder
     {
         $locales = config('app.locales');
 
-     $productCategory = $this->productCategoryRepository->create([
+     $productCategory = $this->productCategoryService->create([
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         foreach ($locales as $locale) {
-            $this->productCategoryRepository->createTranslation([
+            $this->productCategoryService->createTranslation([
                 'product_category_id' => $productCategory->id,
                 'locale' => $locale,
                 'name' => ProductCategoryConstant::TYPE_PHONE_CATEGORY_ARRAY[$locale],

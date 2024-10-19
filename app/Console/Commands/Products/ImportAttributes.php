@@ -23,7 +23,7 @@ class ImportAttributes extends Command
      *
      * @var string
      */
-    protected $description = 'Import products attributes from json file';
+    protected $description = 'Create attributes from constant';
 
     public function __construct(AttributeService $attributeService)
     {

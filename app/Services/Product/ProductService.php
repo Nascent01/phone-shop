@@ -30,4 +30,14 @@ class ProductService implements BaseServiceInterface
     {
         return ProductTranslation::create($attributes);
     }
+
+    public function insert(array $attributes): bool
+    {
+        return Product::insert($attributes);
+    }
+
+    public function insertTranslation(array $attributes): bool
+    {
+        return ProductTranslation::insert($attributes);
+    }
 }

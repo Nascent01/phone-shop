@@ -30,4 +30,14 @@ class ProductCategoryService implements BaseServiceInterface
     {
         return ProductCategoryTranslation::create($attributes);
     }
+
+    public function insert(array $attributes): bool
+    {
+        return ProductCategory::insert($attributes);
+    }
+
+    public function insertTranslation(array $attributes): bool
+    {
+        return ProductCategoryTranslation::insert($attributes);
+    }
 }

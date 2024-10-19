@@ -17,4 +17,20 @@ interface BaseServiceInterface
      * @return Model
      */
     public function createTranslation(array $attributes): Model;
+
+    /**
+     * Insert multiple records at once.
+     *
+     * @param array $attributes
+     * @return bool
+     */
+    public function insert(array $attributes): bool;
+
+    /**
+     * Insert multiple translation records at once.
+     *
+     * @param array $attributes
+     * @return bool
+     */
+    public function insertTranslation(array $attributes): bool;
 }

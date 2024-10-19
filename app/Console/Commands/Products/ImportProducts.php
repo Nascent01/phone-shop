@@ -4,14 +4,16 @@ namespace App\Console\Commands\Products;
 
 use App\Constants\ProductCategory\ProductCategoryConstant;
 use App\Models\Product\Product;
-use App\Models\Product\ProductTranslation;
-use App\Models\ProductCategory\ProductCategoryTranslation;
+use App\Repository\ProductCategory\ProductCategoryRepository;
+use App\Services\Product\ProductService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
 class ImportProducts extends Command
 {
+    protected $productService, $productCategoryRepository;
+
     /**
      * The name and signature of the console command.
      *
@@ -25,6 +27,13 @@ class ImportProducts extends Command
      * @var string
      */
     protected $description = 'Seed Phone Category and Import products from json file';
+
+    public function __construct(ProductService $productService, ProductCategoryRepository $productCategoryRepository)
+    {
+        parent::__construct();
+        $this->productService = $productService;
+        $this->productCategoryRepository = $productCategoryRepository;
+    }
 
     /**
      * Execute the console command.
@@ -66,7 +75,7 @@ class ImportProducts extends Command
         }
 
         if (!empty($dataToInsertProducts) && count($dataToInsertProducts) > 0) {
-            Product::insert($dataToInsertProducts);
+            $this->productService->insert($dataToInsertProducts);
         }
 
         /**
@@ -97,7 +106,7 @@ class ImportProducts extends Command
         $chunkedProductTranslationsData = array_chunk($dataToInsertProductsTranslations, 1500);
 
         foreach ($chunkedProductTranslationsData as $chunk) {
-            ProductTranslation::insert($chunk);
+            $this->productService->insertTranslation($chunk);
         }
 
         /**
@@ -105,7 +114,7 @@ class ImportProducts extends Command
          */
 
         $productRecords = Product::all();
-        $productCategory = ProductCategoryTranslation::where('name', ProductCategoryConstant::TYPE_PHONE_CATEGORY_BG)->first();
+        $productCategory = $this->productCategoryRepository->findByName(ProductCategoryConstant::TYPE_PHONE_CATEGORY_BG);
         $productProductCategoryData = [];
 
         foreach ($productRecords as $productRecord) {

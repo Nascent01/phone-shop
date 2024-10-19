@@ -9,17 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductRepository implements EloquentRepositoryInterface
 {
-
-    public function create(array $attributes): Model
-    {
-        return Product::create($attributes);
-    }
-
-    public function createTranslation(array $attributes): Model
-    {
-      return ProductTranslation::create($attributes);
-    }
-
+    /**
+     * Find a product by ID.
+     *
+     * @param $id
+     * @return Model|null
+     */
     public function find($id): ?Model
     {
         return Product::find($id);

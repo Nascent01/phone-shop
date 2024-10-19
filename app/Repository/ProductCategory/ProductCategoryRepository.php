@@ -3,6 +3,7 @@
 namespace App\Repository\ProductCategory;
 
 use App\Models\ProductCategory\ProductCategory;
+use App\Models\ProductCategory\ProductCategoryTranslation;
 use App\Repository\EloquentRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,5 +17,9 @@ class ProductCategoryRepository implements EloquentRepositoryInterface {
      */
     public function find($id): ?Model {
         return ProductCategory::find($id);
+    }
+
+    public function findByName(string $name): ?Model {
+        return ProductCategoryTranslation::where('name', $name)->first();
     }
 }

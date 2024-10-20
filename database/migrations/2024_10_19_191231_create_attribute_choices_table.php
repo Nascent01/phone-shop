@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('attribute_choices', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('attribute_id');
+            $table->string('machine_name');
             $table->timestamps();
 
             $table->foreign('attribute_id')

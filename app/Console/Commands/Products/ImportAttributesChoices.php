@@ -3,9 +3,7 @@
 namespace App\Console\Commands\Products;
 
 use App\Constants\Attribute\AttributeConstant;
-use App\Models\Attribute\AttributeTranslation;
 use App\Models\AttributeChoice\AttributeChoice;
-use App\Repository\AttributeChoice\AttributeChoiceRepository;
 use App\Services\AttributeChoice\AttributeChoiceService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +11,7 @@ use Illuminate\Support\Facades\Log;
 
 class ImportAttributesChoices extends Command
 {
-    protected $attributeChoiceService, $attributeChoiceRepository;
+    protected $attributeChoiceService;
 
     /**
      * The name and signature of the console command.
@@ -29,11 +27,10 @@ class ImportAttributesChoices extends Command
      */
     protected $description = 'Import attributes choices from json file';
 
-    public function __construct(AttributeChoiceService $attributeChoiceService, AttributeChoiceRepository $attributeChoiceRepository)
+    public function __construct(AttributeChoiceService $attributeChoiceService)
     {
         parent::__construct();
         $this->attributeChoiceService = $attributeChoiceService;
-        $this->attributeChoiceRepository = $attributeChoiceRepository;
     }
 
     /**

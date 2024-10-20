@@ -57,6 +57,7 @@ class ImportProducts extends Command
 
         $productsPath = storage_path('Products.json');
         $products = json_decode(file_get_contents($productsPath), true);
+
         $locales = config('app.locales');
 
         $dataToInsertProducts = [];
